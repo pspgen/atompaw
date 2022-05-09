@@ -1,4 +1,4 @@
-FROM psp00:latest
+FROM pspgen/psp-prerequisites:0.1.0
 
 WORKDIR /build
 # compile atompaw-4.2.0.0
@@ -14,7 +14,9 @@ RUN cd atompaw-4.2.0.0 && \
         --with-libxc-libs="-L/usr/local/libxc/lib -lxc" && \
     make && \
     cp src/atompaw /usr/bin/atompaw42 && \
-    cp src/graphatom /usr/bin/graphatom42
+    cp src/graphatom /usr/bin/graphatom42 && \
+    ln -s /usr/bin/atompaw42 /usr/bin/atompaw && \
+    ln -s /usr/bin/graphatom42 /usr/bin/graphatom
 
 WORKDIR /
 RUN rm -rf /build
