@@ -1,10 +1,12 @@
 FROM pspgen/psp-prerequisites:0.1.0
 
 WORKDIR /build
-# compile atompaw-4.2.0.0
-RUN wget -c http://users.wfu.edu/natalie/papers/pwpaw/atompaw-4.2.0.0.tar.gz && \
-    tar xf atompaw-4.2.0.0.tar.gz
-RUN cd atompaw-4.2.0.0 && \
+ARG VERSION=4.2.0.2
+
+# compile atompaw
+RUN wget -c http://users.wfu.edu/natalie/papers/pwpaw/atompaw-${VERSION}.tar.gz && \
+    tar xf atompaw-${VERSION}.tar.gz
+RUN cd atompaw-${VERSION} && \
     mkdir build && \
     cd build && \
     ../configure FC=/usr/bin/gfortran \
